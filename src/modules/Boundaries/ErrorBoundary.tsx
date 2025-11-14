@@ -14,6 +14,7 @@ export default function ErrorBoundary(): JSX.Element {
   }
 
   const jsError = error as Error;
+  // TODO: Improving by show toast instead of blocking design for better UX
   return (
     <div className="flex justify-center items-center">
       {isDev && <pre>{jsError.stack}</pre>}
