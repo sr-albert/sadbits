@@ -12,17 +12,19 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import {
-  ChevronUp,
   Home,
+  Joystick,
+  ListTodoIcon,
+  ServerCogIcon,
   Settings2,
-  ThermometerSnowflakeIcon,
-  User2,
+  SettingsIcon,
 } from "lucide-react";
 import { Link, Outlet } from "react-router-dom";
 
@@ -36,15 +38,26 @@ const menu = [
   },
   {
     title: "Task",
-    url: "/",
-    icon: ThermometerSnowflakeIcon,
+    url: "/task",
+    icon: ListTodoIcon,
+  },
+  {
+    title: "SVG editor",
+    url: "/svg-editor",
+    icon: ServerCogIcon,
+  },
+  {
+    title: "Relax",
+    url: "relax",
+    icon: Joystick,
   },
 ];
 
 const AppSidebar = (): JSX.Element => {
+  const { open } = useSidebar();
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent>
+      <SidebarContent className="p-2">
         <SidebarMenu>
           {menu.map((item) => (
             <SidebarMenuItem
@@ -66,14 +79,22 @@ const AppSidebar = (): JSX.Element => {
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  {`{{USER_NAME}} and avatar`}
-                  <Settings2 />
-                </SidebarMenuButton>
+                {open ? (
+                  <SidebarMenuButton className="justify-between">
+                    {`{{USER_NAME}} and avatar`}
+                    <Settings2 />
+                  </SidebarMenuButton>
+                ) : (
+                  <SidebarMenuButton>
+                    <SettingsIcon />
+                  </SidebarMenuButton>
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="start" side="top">
                 <DropdownMenuItem className="p-2">
-                  <Typography>Setting</Typography>
+                  <Link to="/setting">
+                    <Typography>Setting</Typography>
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -89,8 +110,8 @@ export default function AppLayout(): JSX.Element {
     <SidebarProvider>
       <AppSidebar />
       <div className="min-h-screen bg-background">
-        <main className="container mx-auto">
-          <SidebarTrigger />
+        <SidebarTrigger />
+        <main className="container mx-auto p-2">
           <Outlet />
         </main>
       </div>
