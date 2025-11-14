@@ -12,6 +12,7 @@ const SVGEditor = lazy(() => import("@/modules/SVGEditor/SVGEditor"));
 const Entertainment = lazy(
   () => import("@/modules/Entertainment/Entertainment")
 );
+const Work = lazy(() => import("@/modules/Work/Work"));
 
 const mainRouter = createBrowserRouter([
   {
@@ -24,8 +25,8 @@ const mainRouter = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "task",
-        Component: Task,
+        path: "work",
+        Component: Work,
       },
       {
         path: "setting",

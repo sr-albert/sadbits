@@ -1,13 +1,14 @@
 import Typography from "@/components/Typography";
+import { ButtonGroup } from "@/components/ui/button-group";
 import {
   DropdownMenu,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
-import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -21,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import {
+  CircleQuestionMark,
   Home,
   Joystick,
   ListTodoIcon,
@@ -28,6 +30,7 @@ import {
   Settings2,
   SettingsIcon,
   SidebarIcon,
+  ToggleRightIcon,
 } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
@@ -40,8 +43,8 @@ const menu = [
     icon: Home,
   },
   {
-    title: "Task",
-    url: "/task",
+    title: "Work",
+    url: "/work",
     icon: ListTodoIcon,
   },
   {
@@ -63,7 +66,7 @@ function AppLayoutContainer(): JSX.Element {
   return (
     <>
       <Sidebar collapsible="icon">
-        <SidebarHeader>
+        <SidebarHeader className="pt-2">
           {open && (
             <SidebarMenu className="flex">
               <SidebarMenuItem className="ml-auto">
@@ -76,7 +79,7 @@ function AppLayoutContainer(): JSX.Element {
             </SidebarMenu>
           )}
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="pl-2 pr-2">
           <SidebarMenu aria-label="Menu">
             {menu.map((item) => (
               <SidebarMenuItem
@@ -95,6 +98,19 @@ function AppLayoutContainer(): JSX.Element {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <SidebarMenuButton>
+                    <CircleQuestionMark />
+                    <Typography>Helps</Typography>
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarMenu>
+
           <SidebarMenu>
             <SidebarMenuItem>
               <DropdownMenu>
@@ -122,9 +138,11 @@ function AppLayoutContainer(): JSX.Element {
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
-      <div className="min-h-screen bg-background">
-        {!open && <SidebarTrigger size="icon-lg" />}
-        <main className="container mx-auto p-2">
+      <div className="min-h-screen w-full">
+        <ButtonGroup className="pt-2 pl-1">
+          {!open && <SidebarTrigger size="icon-lg" />}
+        </ButtonGroup>
+        <main className="container p-2 flex flex-col w-full">
           <Outlet />
         </main>
       </div>
@@ -134,7 +152,7 @@ function AppLayoutContainer(): JSX.Element {
 
 export default function AppLayout(): JSX.Element {
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <AppLayoutContainer />
     </SidebarProvider>
   );
