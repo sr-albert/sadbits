@@ -100,10 +100,8 @@ function AppLayoutContainer(): JSX.Element {
             <SidebarMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <SidebarMenuButton>
-                    <CircleQuestionMark />
-                    <Typography>Helps</Typography>
-                  </SidebarMenuButton>
+                  <CircleQuestionMark />
+                  <Typography>Helps</Typography>
                 </DropdownMenuTrigger>
               </DropdownMenu>
             </SidebarMenuItem>
@@ -137,9 +135,9 @@ function AppLayoutContainer(): JSX.Element {
         </SidebarFooter>
       </Sidebar>
       <div className="min-h-screen w-full">
-        <ButtonGroup className="pt-2 pl-1">
+        <div className="pt-2 pl-1">
           {!open && <SidebarTrigger size="icon-lg" />}
-        </ButtonGroup>
+        </div>
         <main className="container p-2 flex flex-col w-full">
           <Outlet />
         </main>

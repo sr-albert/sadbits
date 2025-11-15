@@ -1,0 +1,63 @@
+import type { JSX } from "react/jsx-runtime";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import { CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
+import { useState } from "react";
+import { Calendar } from "../ui/calendar";
+
+export default function DatePicker({
+  date,
+  placeHolder = "Select date ...",
+  maxDate,
+  minDate,
+  defaultFormat = "PPP",
+  onDateChange,
+}: {
+  placeHolder?: string;
+  date: Date;
+  maxDate?: Date;
+  minDate?: Date;
+  defaultFormat?: string;
+  onDateChange?: (date: Date) => void;
+}): JSX.Element {
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectedDate, setSelectedDate] = useState<Date>(date);
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          data-empty={!selectedDate}
+          className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
+        >
+          <CalendarIcon />
+          {selectedDate ? (
+            format(selectedDate, defaultFormat)
+          ) : (
+            <span>{placeHolder}</span>
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+        <Calendar
+          mode="single"
+          captionLayout="dropdown"
+          selected={selectedDate}
+          onSelect={(d) => {
+            if (d) {
+              setOpen(false);
+              setSelectedDate(d);
+              onDateChange?.(d);
+            }
+          }}
+          buttonVariant="ghost"
+          hidden={{
+            ...(minDate && { before: minDate }),
+            ...(maxDate && { after: maxDate }),
+          }}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+}

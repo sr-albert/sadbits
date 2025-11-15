@@ -24,3 +24,8 @@ The React Compiler is not enabled on this template because of its impact on dev 
 Use Data Mode if you: want data features but also want to have control over bundling, data, and server abstractions
 started a data router in v6.4 and are happy with it
 
+
+
+## Date
+- Date library: date-fns
+- !IMPORTANT!: the date returns from BE always in UTC format

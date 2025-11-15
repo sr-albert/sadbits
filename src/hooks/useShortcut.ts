@@ -19,7 +19,11 @@ export function useShortcut(
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() === keyStrokes.toLowerCase() && metaKey) {
+      const metaKeyPressed = metaKey === "cmd" ? event.metaKey : event.ctrlKey;
+      if (
+        event.key.toLowerCase() === keyStrokes.toLowerCase() &&
+        metaKeyPressed
+      ) {
         event.preventDefault();
         callback();
       }

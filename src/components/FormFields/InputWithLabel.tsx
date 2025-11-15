@@ -19,7 +19,12 @@ export default function InputWithLabel({
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
           <FieldLabel htmlFor={htmlFor}>{label}</FieldLabel>
-          <Input {...field} id={htmlFor} aria-invalid={fieldState.invalid} />
+          <Input
+            {...field}
+            id={htmlFor}
+            aria-invalid={fieldState.invalid}
+            onChange={(e) => field.onChange(e.target.value)}
+          />
         </Field>
       )}
     />
