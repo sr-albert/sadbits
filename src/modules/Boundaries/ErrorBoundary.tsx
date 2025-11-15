@@ -1,4 +1,4 @@
-import { useApp } from "@/hooks/use-app";
+import { useApp } from "@/hooks/useApp";
 import type { JSX } from "react";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import NotFound from "./NotFound";

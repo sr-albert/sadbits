@@ -8,7 +8,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -30,7 +29,6 @@ import {
   Settings2,
   SettingsIcon,
   SidebarIcon,
-  ToggleRightIcon,
 } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
